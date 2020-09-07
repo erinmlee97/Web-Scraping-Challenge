@@ -24,8 +24,8 @@ def scrape():
     soup = bs(html, 'html.parser')
 
     # Collect the latest news title and paragraph
-    title = soup.find('div', class_='content_title').text
-    p = soup.find('div', class_='article_teaser_body').text
+    news_title = soup.find('div', class_='content_title').text
+    news_p = soup.find('div', class_='article_teaser_body').text
 
     ########### JPL Mars Space Images - Featured Image  ###########
     # URL for featured image 
@@ -101,8 +101,8 @@ def scrape():
     
     ########### Store the return value in Mongo as a Python dictionary ###########
     mars_data = {
-        "news_title": title,
-        "news_p": p,
+        "news_title": news_title,
+        "news_p": news_p,
         "featured_image_url": featured_image_url,
         "mars_facts": mars_facts,
         "hemisphere_image_urls": hemisphere_image_urls
