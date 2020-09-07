@@ -24,9 +24,8 @@ def scrape():
     soup = bs(html, 'html.parser')
 
     # Collect the latest news title and paragraph
-    article = soup.find("div", class_='list_text')
-    title = article.find("div", class_="content_title").text
-    p = article.find("div", class_ ="article_teaser_body").text
+    title = soup.find('div', class_='content_title').text
+    p = soup.find('div', class_='article_teaser_body').text
 
     ########### JPL Mars Space Images - Featured Image  ###########
     # URL for featured image 
@@ -64,11 +63,10 @@ def scrape():
     mars_facts.columns = ['Description','Value']
 
     # Reset Index to be description
-    mars_facts.set_index('Description', inplace=True)
-    mars_facts
+    mars_facts.set_index('Description')
 
     # Use Pandas to convert the data to a HTML table string
-    mars_facts.to_html('table.html')
+    mars_facts = mars_facts.to_html(classes="table table-striped")
 
     ########### Mars Hemispheres  ###########
     # Visit the USGS Astrogeology site
